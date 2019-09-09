@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Shenaida/eventweek-solitair-student.svg?branch=group_version)](https://travis-ci.org/Shenaida/eventweek-solitair-student)
+
 # Solitaire / Patience
 ##### Software Engineering Event Week With Quintor
 
