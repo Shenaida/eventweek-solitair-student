@@ -15,8 +15,8 @@ import nl.quintor.solitaire.models.deck.DeckType;
  * shown to the user.
  */
 public class CardMoveChecks {
-    private CardMoveChecks(){}
     private final static String helpInstructions = new Help().toString();
+    private CardMoveChecks(){}
 
     /**
      * Verifies that the player input for a CardMove is syntactically legal. Legal input consists of three parts:
@@ -45,7 +45,25 @@ public class CardMoveChecks {
      * @throws MoveException on illegal move
      */
     public static void deckLevelChecks(Deck sourceDeck, int sourceCardIndex, Deck destinationDeck) throws MoveException {
-        // TODO: Write implementation
+        if(sourceDeck.size()==0)
+        {
+            throw new MoveException("You can't move a card from an empty deck");
+        }
+        if(destinationDeck.getDeckType()==DeckType.STOCK) //&& sourceDeck.getDeckType()!=DeckType.STOCKmoet ik ook sourcedeck opgeven??
+        {
+            throw new MoveException("You can't move cards to the stock");
+        }
+        if(sourceDeck.getDeckType()==DeckType.COLUMN  &&
+            sourceCardIndex < sourceDeck.size()-1   &&
+            sourceDeck.getInvisibleCards() <= sourceCardIndex &&
+            destinationDeck.getDeckType()==DeckType.STACK )//&& (sourceDeck.getDeckType()==DeckType.COLUMN || sourceDeck.getDeckType()==DeckType.STACK) && sourceDeck.getDeckType()!=DeckType.WASTE
+        {
+            throw new MoveException("You can't move more than 1 card at a time to a Stack Pile");
+        }
+        if(sourceDeck.getDeckType()==DeckType.COLUMN && sourceDeck.getInvisibleCards() > sourceCardIndex )
+        {
+            throw new MoveException("You can't move an invisible card");
+        }
     }
 
     /**
@@ -94,7 +112,10 @@ public class CardMoveChecks {
      * @return true if the cards are of different colors
      */
     static boolean opposingColor(Card card1, Card card2){
-        // TODO: Write implementation
+        if( redSuit(card1)==redSuit(card2)||!redSuit(card1)==!redSuit(card2))
+        {
+            return false;
+        }
         return true;
     }
 

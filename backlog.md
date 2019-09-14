@@ -8,9 +8,9 @@ on the work your team sees.
 
 | #     | Description                                       | Difficulty
 |-------|:-------------------------------------------------:|----------------------
-| 1     | Write the implementations for CardMoveChecks deckLevelCheck method| Easy
-| 2     | Write the implementations for CardMoveChecks opposingColor method| Easy
-| 3     | Write the implementations for CardMoveChecks cardMoveCheck method| Easy
+| 1     | Write the implementations for CardMoveChecks deckLevelCheck method| Easy V
+| 2     | Write the implementations for CardMoveChecks opposingColor method| Easy V
+| 3     | Write the implementations for CardMoveChecks cardMoveCheck method| Easy 
 | 4     | Write the implementation for the GameStateController init method| Difficult
 | 5     | Write the implementations for CardMoveChecks checkPlayerInput method| Moderate
 | 6     | Write the implementations for GameStateParser PadAndAdd method| Moderate

@@ -112,16 +112,16 @@ class CardMoveChecksSpec extends Specification {
             CardMoveChecks.cardLevelChecks(targetDeck, cardToAdd)
         where:
             targetDeck                  | cardToAdd                                             | testCase
-        new Deck(DeckType.STACK)| new Card(Suit.CLUBS, Rank.ACE)|"Ace should be allowed on empty stack"
-        TestUtil.createTestDeckWithCards(DeckType.STACK, [new Card(Suit.DIAMONDS, Rank.ACE)])| new Card(Suit.DIAMONDS, Rank.TWO)|"two should be allowed in stack containing ace"
-        new Deck(DeckType.COLUMN)| new Card(Suit.DIAMONDS, Rank.KING)| "King should be allowed as first card in a column deck"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.DIAMONDS, Rank.KING)])| new Card(Suit.CLUBS, Rank.QUEEN)| "column deck with Diamond card should allow club card with decreased value of one"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.DIAMONDS, Rank.KING)])| new Card(Suit.SPADES, Rank.QUEEN)| "column deck with Diamond card should allow spade card with decreased value of one"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)])| new Card(Suit.SPADES, Rank.QUEEN)| "column deck with hearts card should allow spade card with decreased value of one"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)])| new Card(Suit.CLUBS, Rank.QUEEN)| "column deck with hearts card should allow club card with decreased value of one"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.CLUBS, Rank.KING)])| new Card(Suit.HEARTS, Rank.QUEEN)| "column deck with clubs card should allow hearts card with decreased value of one"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.CLUBS, Rank.KING)])| new Card(Suit.DIAMONDS, Rank.QUEEN)| "column deck with clubs card should allow diamond card with decreased value of one"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.SPADES, Rank.KING)])| new Card(Suit.HEARTS, Rank.QUEEN)| "column deck with spade card should allow hearts card with decreased value of one"
+        new Deck(DeckType.STACK)                                                                | new Card(Suit.CLUBS, Rank.ACE)      | "Ace should be allowed on empty stack"
+        TestUtil.createTestDeckWithCards(DeckType.STACK, [new Card(Suit.DIAMONDS, Rank.ACE)])   | new Card(Suit.DIAMONDS, Rank.TWO)   | "two should be allowed in stack containing ace"
+        new Deck(DeckType.COLUMN)                                                               | new Card(Suit.DIAMONDS, Rank.KING)  | "King should be allowed as first card in a column deck"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.DIAMONDS, Rank.KING)]) | new Card(Suit.CLUBS, Rank.QUEEN)    | "column deck with Diamond card should allow club card with decreased value of one"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.DIAMONDS, Rank.KING)]) | new Card(Suit.SPADES, Rank.QUEEN)   | "column deck with Diamond card should allow spade card with decreased value of one"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)])   | new Card(Suit.SPADES, Rank.QUEEN)   | "column deck with hearts card should allow spade card with decreased value of one"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)])   | new Card(Suit.CLUBS, Rank.QUEEN)    | "column deck with hearts card should allow club card with decreased value of one"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.CLUBS, Rank.KING)])    | new Card(Suit.HEARTS, Rank.QUEEN)   | "column deck with clubs card should allow hearts card with decreased value of one"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.CLUBS, Rank.KING)])    | new Card(Suit.DIAMONDS, Rank.QUEEN) | "column deck with clubs card should allow diamond card with decreased value of one"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.SPADES, Rank.KING)])   | new Card(Suit.HEARTS, Rank.QUEEN)   | "column deck with spade card should allow hearts card with decreased value of one"
         TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.SPADES, Rank.KING)])| new Card(Suit.DIAMONDS, Rank.QUEEN)| "column deck with spade card should allow diamond card with decreased value of one"
     }
 
@@ -153,7 +153,7 @@ class CardMoveChecksSpec extends Specification {
     @Unroll
     def "Given #card redSuit should return #expectedResult" () {
         expect:
-            def actualResult = CardMoveChecks.redSuit(card)
+            boolean actualResult = CardMoveChecks.redSuit(card)
             actualResult == expectedResult
         where:
         card                                || expectedResult
