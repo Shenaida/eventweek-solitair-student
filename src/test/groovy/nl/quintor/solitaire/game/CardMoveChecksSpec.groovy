@@ -13,16 +13,16 @@ import spock.lang.Unroll
 class CardMoveChecksSpec extends Specification {
 
     @Unroll
-    def "Invalid input calling checkPlayerInput whith #input will throw #exception.getSimpleName() with message |#message| when testing: #testcase" () {
+    def "Invalid input calling checkPlayerInput with #input will throw #exception.getSimpleName() with message |#message| when testing: #testcase"() {
         when:
         CardMoveChecks.checkPlayerInput(input)
         then:
         def ex = thrown(exception)
         ex.getMessage() == message
         where:
-        testcase| input | exception | message
-        "Invalid source move"|["M", "Z", "G"] as String[] | MoveException | 'Invalid Move syntax. "Z" is not a valid source location.\nSee H̲elp for instructions.'
-        "Invalid destination move"|["M", "O", "Z"] as String[] | MoveException | 'Invalid Move syntax. "Z" is not a valid destination location.\nSee H̲elp for instructions.'
+        testcase                   | input                       | exception     | message
+        "Invalid source move"      | ["M", "Z", "G"] as String[] | MoveException | 'Invalid Move syntax. "Z" is not a valid source location.\nSee H̲elp for instructions.'
+        "Invalid destination move" | ["M", "O", "Z"] as String[] | MoveException | 'Invalid Move syntax. "Z" is not a valid destination location.\nSee H̲elp for instructions.'
     }
 
     @Unroll
@@ -97,13 +97,13 @@ class CardMoveChecksSpec extends Specification {
             ex.message == exceptionMessage
         where:
         targetDeck                     | cardToAdd                           | exceptionMessage                           || testCase
-        TestUtil.createTestDeck(DeckType.STOCK) | new Card(Suit.DIAMONDS, Rank.EIGHT) | "Target deck is neither Stack nor Column." || "Moving card to deck should only be allowed to Stack or column deck"
-        TestUtil.createTestDeck(DeckType.STACK) | new Card(Suit.DIAMONDS, Rank.TWO) | "An Ace has to be the first card of a Stack Pile" || "Moving card not being an ace to an empty stack"
-        TestUtil.createTestDeckWithCards(DeckType.STACK, [new Card(Suit.HEARTS, Rank.ACE)]) | new Card(Suit.HEARTS, Rank.THREE) | 'Stack Piles hold same-suit cards of increasing Rank from Ace to King' || "Moving card to stack should be increasing"
-        TestUtil.createTestDeckWithCards(DeckType.STACK, [new Card(Suit.HEARTS, Rank.ACE)]) | new Card(Suit.DIAMONDS, Rank.TWO) | 'Stack Piles can only contain same-suit cards' || "Moving card to stack should be same suit"
-        new Deck(DeckType.COLUMN)| new Card(Suit.DIAMONDS, Rank.TWO) | 'A King has to be the first card of a Column' || "Moving card to empty column can only be a King"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)]) | new Card(Suit.DIAMONDS, Rank.QUEEN) | 'Column cards have te alternate colors (red and black)' || "Moving card to column must be opposite suit"
-        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)]) | new Card(Suit.SPADES, Rank.JACK) | 'Columns hold alternating-color cards of decreasing rank from King to Two' || "Moving card to column must be in descending rank"
+        TestUtil.createTestDeck(DeckType.STOCK)                                               | new Card(Suit.DIAMONDS, Rank.EIGHT) | "Target deck is neither Stack nor Column."                                 || "Moving card to deck should only be allowed to Stack or column deck"
+        TestUtil.createTestDeck(DeckType.STACK)                                               | new Card(Suit.DIAMONDS, Rank.TWO)   | "An Ace has to be the first card of a Stack Pile"                          || "Moving card not being an ace to an empty stack"
+        TestUtil.createTestDeckWithCards(DeckType.STACK, [new Card(Suit.HEARTS, Rank.ACE)])   | new Card(Suit.HEARTS, Rank.THREE)   | 'Stack Piles hold same-suit cards of increasing Rank from Ace to King'     || "Moving card to stack should be increasing"
+        TestUtil.createTestDeckWithCards(DeckType.STACK, [new Card(Suit.HEARTS, Rank.ACE)])   | new Card(Suit.DIAMONDS, Rank.TWO)   | 'Stack Piles can only contain same-suit cards'                             || "Moving card to stack should be same suit"
+        new Deck(DeckType.COLUMN)                                                             | new Card(Suit.DIAMONDS, Rank.TWO)   | 'A King has to be the first card of a Column'                              || "Moving card to empty column can only be a King"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)]) | new Card(Suit.DIAMONDS, Rank.QUEEN) | 'Column cards have te alternate colors (red and black)'                    || "Moving card to column must be opposite suit"
+        TestUtil.createTestDeckWithCards(DeckType.COLUMN, [new Card(Suit.HEARTS, Rank.KING)]) | new Card(Suit.SPADES, Rank.JACK)    | 'Columns hold alternating-color cards of decreasing rank from King to Two' || "Moving card to column must be in descending rank"
     }
 
     @Unroll
