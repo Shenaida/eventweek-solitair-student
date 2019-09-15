@@ -57,8 +57,17 @@ class GameStateParser {
      * @return did the row contain any cards
      */
     protected static boolean printRow(StringBuilder builder, Collection<Deck> columns, int row) {
-        // TODO: Write implementation
-        return true;
+        columns.stream().forEach(deck -> {
+                String rowValue = "";
+                if(row < deck.size())
+                    if(row <= deck.getInvisibleCards() - 1)
+                        rowValue = "? ?";
+                    else
+                        rowValue = deck.get(row).toShortString();
+                padNAdd(builder, rowValue , 8);
+            }
+        );
+        return builder.toString().trim().length() > 1;
     }
 
     /**
