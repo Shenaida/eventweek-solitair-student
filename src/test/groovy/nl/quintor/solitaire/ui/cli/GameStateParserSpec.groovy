@@ -35,7 +35,7 @@ class GameStateParserSpec extends Specification {
             inputDeck | index |  expectedResult || testCase
             new Deck()|0|null|| 'Should return null when input deck is empty'
             new Deck()|99|null|| 'Should return null when index is invalid'
-            TestUtil.createTestDeckWithCards([new Card(Suit.HEARTS, Rank.KING), new Card(Suit.DIAMONDS, Rank.THREE)])|1|'♦ 3'|'Should return ♦ 3 whith valid index pointing to card'
+            TestUtil.createTestDeckWithCards([new Card(Suit.HEARTS, Rank.KING), new Card(Suit.DIAMONDS, Rank.THREE)])|1|'D 3'|'Should return ♦ 3 with valid index pointing to card'
     }
 
     @Unroll

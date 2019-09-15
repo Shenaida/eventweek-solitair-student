@@ -12,7 +12,8 @@ class GameStateParser {
     private final static int COLUMN_WIDTH = 8; // 8 columns in 64 char width (80 char width is Windows default)
     private final static int FIRST_COLUMN_WIDTH = 3;
 
-    protected GameStateParser(){}
+    protected GameStateParser() {
+    }
 
     /**
      * Parses {@link GameState} to a String representation for terminal printing.
@@ -36,10 +37,10 @@ class GameStateParser {
      *  7
      *  }</pre>
      *
-     *  @param gameState a representation of the current state of the game
-     *  @return a visual representation of the gameState (for monospace terminal printing)
+     * @param gameState a representation of the current state of the game
+     * @return a visual representation of the gameState (for monospace terminal printing)
      */
-    static String parseGameState(GameState gameState){
+    static String parseGameState(GameState gameState) {
         // TODO: Write implementation
         return "";
     }
@@ -52,10 +53,10 @@ class GameStateParser {
      *
      * @param builder contains the visualization of the game state
      * @param columns the columns of which the row is printed
-     * @param row the row of the columns to be printed
+     * @param row     the row of the columns to be printed
      * @return did the row contain any cards
      */
-    protected static boolean printRow(StringBuilder builder, Collection<Deck> columns, int row){
+    protected static boolean printRow(StringBuilder builder, Collection<Deck> columns, int row) {
         // TODO: Write implementation
         return true;
     }
@@ -63,12 +64,14 @@ class GameStateParser {
     /**
      * Attempts to get the specified card from the deck, and returns null if the requested index is out of bounds.
      *
-     * @param deck deck to get the card from
+     * @param deck  deck to get the card from
      * @param index index of the card to get
      * @return the requested card or null
      */
-    protected static String getCardStringOrNull(Deck deck, int index){
-        // TODO: Write implementation
+    protected static String getCardStringOrNull(Deck deck, int index) {
+        if (deck.size() != 0 && index > 0) {
+            return deck.get(index).getSuit().getSymbol() + " " + deck.get(index).getRank().getSymbol();
+        }
         return null;
     }
 
@@ -76,11 +79,23 @@ class GameStateParser {
      * Add a space to the left of the string if it is of length 1, then add spaces to the right until it is of size
      * totalLength. Append the result to the StringBuilder.
      *
-     * @param builder StringBuilder to append the result to
-     * @param string String to pad and append
+     * @param builder     StringBuilder to append the result to
+     * @param string      String to pad and append
      * @param totalLength The total length that the String must become
      */
-    protected static void padNAdd(StringBuilder builder, String string, int totalLength){
-        // TODO: Write implementation
+    protected static void padNAdd(StringBuilder builder, String string, int totalLength) {
+        if (string.length() == 1) {
+            String temporyString = " " + string;
+            builder.append(temporyString);
+
+            for (int i = 0; i < totalLength - string.length() - 1; i++) {
+                builder.append(" ");
+            }
+        } else {
+            builder.append(string);
+            for (int i = 0; i < totalLength - string.length(); i++) {
+                builder.append(" ");
+            }
+        }
     }
 }
